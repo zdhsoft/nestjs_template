@@ -1,9 +1,3 @@
-import path from 'path';
-import fs from 'fs';
-import { utils, XCommonRet } from 'xmcommon';
-import { XConfigUtils } from '../init/config_utils';
-import { EnumErrorCode } from '../error/error_code';
-
 /** 计数类的实现 */
 export class XSeqDef {
     /** 序号 */
