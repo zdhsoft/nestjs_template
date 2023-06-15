@@ -28,7 +28,7 @@
         "noImplicitReturns": true,
         "esModuleInterop": true,
         "newLine":"crlf",
-        "typeRoots": ["@types"],
+        "typeRoots": ["node_modules/@types"],
         "types": [
             "node", "lodash", "express", "express-session", "jest", "js-yaml", "multer"
         ],
@@ -42,4 +42,3 @@
         "**/*.spec.ts"
     ]
 }
-

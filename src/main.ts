@@ -8,7 +8,7 @@ import { XHttpFilterFilter } from './common/http_filter.filter';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import session from 'express-session';
 import path from 'path';
-import { XAuthGuard } from './common/auth.guard';
+// import { XAuthGuard } from './common/auth.guard';
 import { XEnvUtils } from './env_utils';
 import { XConfigUtils } from './init/config_utils';
 import { XValidationPipe } from './common/validation_pipe';
@@ -29,7 +29,7 @@ async function bootstrap() {
     app.useGlobalPipes(new XValidationPipe());
     app.useGlobalInterceptors(new XRequestInterceptor());
     app.useGlobalFilters(new XHttpFilterFilter());
-    app.useGlobalGuards(new XAuthGuard());
+    // app.useGlobalGuards(new XAuthGuard()); 这块放到appModule中去了
 
     if (XEnvUtils.isDev) {
         // 如果是开发模式，则加载文档

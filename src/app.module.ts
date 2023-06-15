@@ -4,6 +4,8 @@ import { XAppController } from './app.controller';
 import { XAppService } from './app.service';
 import { XConfigUtils } from './init/config_utils';
 import { XRedisService } from './service/redis.service';
+import { APP_GUARD } from '@nestjs/core';
+import { XAuthGuard } from './common/auth.guard';
 
 const TypeOrmConfig = XConfigUtils.buildMySQLOption();
 
@@ -23,7 +25,14 @@ const TypeOrmConfig = XConfigUtils.buildMySQLOption();
         TypeOrmModule.forRoot(TypeOrmConfig),
     ],
     controllers: [XAppController],
-    providers: [XAppService, XRedisService],
+    providers: [
+        {
+            provide: APP_GUARD,
+            useClass: XAuthGuard,
+        },
+        XAppService,
+        XRedisService,
+    ],
     exports: [XRedisService],
 })
 export class XAppModule {}
