@@ -1,6 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { XAppService } from './app.service';
 import { NotAuth } from './common/decorator/not_auth';
+import { NotCheck } from './common/decorator/not_check';
 
 @Controller()
 export class XAppController {
@@ -8,6 +9,7 @@ export class XAppController {
 
     @Get('notauth')
     @NotAuth()
+    @NotCheck()
     getHello(): string {
         return this.appService.getHello();
     }

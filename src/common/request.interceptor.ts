@@ -4,8 +4,9 @@ import { tap, map } from 'rxjs/operators';
 import { getLogger, XCommonRet } from 'xmcommon';
 import { IHttpRet, XRetUtils } from './ret_utils';
 import { Response, Request } from 'express';
-import { urlPrefix } from './constant';
-import { XCommUtils } from './commutils';
+// import { XCommUtils } from './commutils';
+import { Reflector } from '@nestjs/core';
+import { METADATA_NOT_CHECK } from './decorator/not_check';
 
 const log = getLogger(__filename);
 /** 每次请求的记数器 */
@@ -16,6 +17,9 @@ let requestSeq = 0;
  */
 @Injectable()
 export class XRequestInterceptor implements NestInterceptor {
+    constructor(private reflector: Reflector) {
+        //
+    }
     /**
      * 拦截器入口
      * @param paramContext 上下文对象
@@ -42,7 +46,9 @@ export class XRequestInterceptor implements NestInterceptor {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         req['seq'] = seq;
-        const isCheckAPI = XCommUtils.hasStartsWith(url, urlPrefix.API);
+
+        const isNotCheck = this.reflector.get<boolean>(METADATA_NOT_CHECK, paramContext.getHandler());
+        const isCheckAPI = isNotCheck !== true; // XCommUtils.hasStartsWith(url, urlPrefix.API);
 
         if (isCheckAPI) {
             return paramNext

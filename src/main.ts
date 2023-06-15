@@ -3,7 +3,6 @@ import { NestFactory } from '@nestjs/core';
 import { XAppModule } from './app.module';
 import { getLogger } from 'xmcommon';
 import { XNestLogger } from './common/nest.logger';
-import { XRequestInterceptor } from './common/request.interceptor';
 import { XHttpFilterFilter } from './common/http_filter.filter';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import session from 'express-session';
@@ -26,7 +25,6 @@ async function bootstrap() {
     app.setBaseViewsDir(path.join(process.cwd(), 'view')); // 放视图的文件
     app.setViewEngine('ejs');
     app.useGlobalPipes(new XValidationPipe());
-    app.useGlobalInterceptors(new XRequestInterceptor());
     app.useGlobalFilters(new XHttpFilterFilter());
 
     if (XEnvUtils.isDev) {

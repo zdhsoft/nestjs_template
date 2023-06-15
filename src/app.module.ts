@@ -4,8 +4,9 @@ import { XAppController } from './app.controller';
 import { XAppService } from './app.service';
 import { XConfigUtils } from './init/config_utils';
 import { XRedisService } from './service/redis.service';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { XAuthGuard } from './common/auth.guard';
+import { XRequestInterceptor } from './common/request.interceptor';
 
 const TypeOrmConfig = XConfigUtils.buildMySQLOption();
 
@@ -29,6 +30,10 @@ const TypeOrmConfig = XConfigUtils.buildMySQLOption();
         {
             provide: APP_GUARD,
             useClass: XAuthGuard,
+        },
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: XRequestInterceptor,
         },
         XAppService,
         XRedisService,
