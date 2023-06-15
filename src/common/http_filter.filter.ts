@@ -14,9 +14,7 @@ export class XHttpFilterFilter implements ExceptionFilter {
         const request = ctx.getRequest() as Request;
 
         const message = paramException.message;
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        log.error(`请求发生异常: [${request['seq']}]<== ${request.method} ${request.path} ${message}`);
+        log.error(`请求发生异常: ${request.method} ${request.path} ${message}`);
 
         let retCode = EnumErrorCode.FAIL;
         let status = HttpStatus.OK;
