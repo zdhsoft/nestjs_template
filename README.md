@@ -2,31 +2,11 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
 # 项目：nestjs_template
 - 作者：zdhsoft
 - 日期：2023-05-19
 - 基于nestjs的后端系统
-- License: 
+- License:
 
 
 ## 1. Description
@@ -70,15 +50,20 @@ import { ValidationPipe } from './common/validation_pipe';
 - 这里已经集成了log4js生成日志，有三个输出分别是console，日志文件和错误日志文件
 #### 1.3.3 这里集成了全局的守护的功能：auth.guards.ts
 - 这个会对api做登录检查，有需要登录的，如果没有登录，返回没有登录的错误
+- 新的版本，对这个功能已经重新做了调整，之前是通过指定的url前缀来忽略，现在改用装饰器NotAuth(not_auth.ts)来实现这个功能。
+- 只需要在不要验证登录的请求加上这个，就可以了。  参考app.controller.ts中的例子
+- 另外，auth.guards由之前的设为全局，改成了在app_module里面提供了。
 #### 1.3.4 全局的验证管道: validation_pipe.ts
 - 这个主要是针对class-validator和class-transformer的依赖参数注入，这方面的资料比较多，可以看官方文档
 #### 1.3.5 全局的异常处理 http_filter.filter.ts
 - 这个主要是将抛出的异常获取，并转换为通用的返回方式
 #### 1.3.6 全局的返回处理 这块代码在全局的拦截器里面 request.interceptor.ts
 - nestjs没有默认的固定返回结构，可以返回任何内容。这里专门针对api的调用，做统一返回处理
+- 之前由url来判断是否检查的，现在改成了装饰器NotCheck（not_check.ts)来实现这个功能
 #### 1.3.7 全局的拦截器 request.interceptor.ts
 - 这里主要的是处理POST 201的返回，将它变成为200，
 - 增加请求处理前后的日志打印和耗时打印，用于调试
+- 另外，request.interceptor由之前的设为全局，改成了在app_module里面提供了。
 #### 1.3.7 集成swagger
 - 在开发模式下，集成了  http://xxxx/apidoc方式访问
 
@@ -91,9 +76,9 @@ import { ValidationPipe } from './common/validation_pipe';
   - 默认的envid是'local'，除此之外，还有一个缺省环境，对一些所有环境公有的配置，可以放到env.default.yaml中,  这样可以减少配置量。在实际的环境如果有同名的，则实际的配置会替换在default中的配置。
   - 如果程序启动，需要指定环境id,则只要传入参数就可以，如下启动'test'环境。
   ```bash
-  node dist/main.js --envid test 
+  node dist/main.js --envid test
   ```
-#### 1.4.2 增加自定义环境说明 
+#### 1.4.2 增加自定义环境说明
 - 默认的工程，提供了四个默认环境与配置，分别是,default, test, local, production，这些环境都定义在EnumRuntimeEnv这个枚举中
 - 枚举等运行环境相关配置放在文件，src/env_utils.ts中
 ```typescript
@@ -238,4 +223,3 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
-
