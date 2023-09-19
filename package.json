@@ -58,7 +58,7 @@
     "@types/js-yaml": "^4.0.6",
     "@types/lodash": "^4.14.198",
     "@types/multer": "^1.4.7",
-    "@types/node": "^20.6.2",
+    "@types/node": "^16.18.52",
     "@types/passport-local": "^1.0.35",
     "@types/session-file-store": "^1.2.2",
     "@types/supertest": "^2.0.12",
