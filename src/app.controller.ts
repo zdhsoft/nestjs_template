@@ -1,21 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
-import { XAppService } from './app.service';
-import { NotAuth } from './common/decorator/not_auth';
-import { NotCheck } from './common/decorator/not_check';
+import { AppService } from './app.service';
 
 @Controller()
-export class XAppController {
-    constructor(private readonly appService: XAppService) {}
+export class AppController {
+  constructor(private readonly appService: AppService) {}
 
-    @Get('notauth')
-    @NotAuth()
-    @NotCheck()
-    getHello(): string {
-        return this.appService.getHello();
-    }
-
-    @Get('test')
-    test(): string {
-        return 'this is test';
-    }
+  @Get()
+  getHello(): string {
+    return this.appService.getHello();
+  }
 }
