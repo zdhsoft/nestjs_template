@@ -5,6 +5,7 @@
   "author": "zdhsoft",
   "private": true,
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
