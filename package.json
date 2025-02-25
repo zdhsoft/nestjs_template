@@ -1,10 +1,10 @@
 {
-  "name": "template11",
+  "name": "nestjs_templatev11",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "nestjs 11的模板项目",
+  "author": "zdhsoft",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
