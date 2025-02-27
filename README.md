@@ -97,3 +97,10 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## 计划
+
+- 创建 nestjs 11的项目 (ok)
+- 优化 eslint 配置 (进行中)
+- 集成日志模块(log4js) (进行中)
+- 集成swagger模块(swagger-ui-express)
