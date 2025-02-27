@@ -1,0 +1,7 @@
+{
+    "plugins": ["prettier-plugin-organize-attributes"],
+    "printWidth": 160,
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": true
+}
